@@ -1,0 +1,26 @@
+{
+  "name": "test-driven-deployment-team-generator",
+  "version": "1.0.0",
+  "description": "## Your Task",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lilyfostergrellis/team-profile-generator-tdd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lilyfostergrellis/team-profile-generator-tdd/issues"
+  },
+  "homepage": "https://github.com/Lilyfostergrellis/team-profile-generator-tdd#readme",
+  "dependencies": {
+    "jest": "^29.4.3"
+  }
+}
