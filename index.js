@@ -16,6 +16,47 @@ const Employee = require("./lib/Employee");
 
 let team = [];
 
+// add manager user prompts
+function addManager() {
+    console.log("Please enter information for the Team Manager:");
+    inquirer.prompt([
+        {
+          type: "input",
+          name: "name",
+          message: "Name:",
+        },
+
+        {
+          type: "input",
+          name: "id",
+          message: "Employee ID:",
+        },
+
+        {
+          type: "input",
+          name: "email",
+          message: "Email address:",
+        },
+
+        {
+          type: "input",
+          name: "officeNumber",
+          message: "Office number:",
+        },
+
+    ])
+    .then((answers) => {
+        const manager = new Manager(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.officeNumber
+        );
+        team.push(manager);
+        promptUser();
+    })
+}
+
 function addIntern(){
 //Add intern user prompts
 console.log("Please enter information for the Intern:");
@@ -103,46 +144,45 @@ function addEngineer() {
     });
 }
 
-// add manager user prompts
-function addManager() {
-    console.log("Please enter information for the Team Manager:");
-    inquirer.prompt([
+// function to choose who to add next
+function promptUser() {
+    inquirer
+      .prompt([
         {
-          type: "input",
-          name: "name",
-          message: "Name:",
+          type: "list",
+          name: "action",
+          message: "Choose one of the following:",
+          choices: [
+            "Add an Engineer",
+            "Add an Intern",
+            "Finish building the team",
+          ],
         },
+      ])
 
-        {
-          type: "input",
-          name: "id",
-          message: "Employee ID:",
-        },
+      .then((answers) => {
+        switch (answers.action) {
+          case "Add an Engineer":
+            addEngineer();
+            break;
+          case "Add an Intern":
+            addIntern();
+            break;
+  
+          case "Finish building the team":
+            const html = renderTeam(team);
+            const outputPath = path.join(OUTPUT_DIR, "team.html");
+            fs.writeFile(outputPath, html, (err) => {
+              if (err) throw err;
+              console.log(`Team profile page generated at:${outputPath}`);
+            });
+            break;
+          default:
+            break;
+        }
+      });
+  }
 
-        {
-          type: "input",
-          name: "email",
-          message: "Email address:",
-        },
-
-        {
-          type: "input",
-          name: "officeNumber",
-          message: "Office number:",
-        },
-
-    ])
-    .then((answers) => {
-        const manager = new Manager(
-          answers.name,
-          answers.id,
-          answers.email,
-          answers.officeNumber
-        );
-        team.push(manager);
-        promptUser();
-    });
-}
 
 
 
