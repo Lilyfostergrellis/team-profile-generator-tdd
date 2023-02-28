@@ -18,7 +18,7 @@ let team = [];
 
 function addIntern(){
 //Add intern user prompts
-
+console.log("Please enter information for the Intern:");
     inquirer.prompt([
         {
             type: "input",
@@ -59,10 +59,10 @@ function addIntern(){
 
 }
 
-// add engineer
+// add engineer user prompts
 function addEngineer() {
-    inquirer
-      .prompt([
+    console.log("Please enter information for the Engineer:");
+    inquirer.prompt([
         {
           type: "input",
           name: "name",
@@ -89,18 +89,60 @@ function addEngineer() {
           message: "GitHub Username:",
         },
 
-      ])
-      .then((answers) => {
+    ])
+    .then((answers) => {
         const engineer = new Engineer(
           answers.name,
           answers.id,
           answers.email,
           answers.github
         );
+        
         team.push(engineer);
         promptUser();
-      });
-  }
+    });
+}
+
+// add manager user prompts
+function addManager() {
+    console.log("Please enter information for the Team Manager:");
+    inquirer.prompt([
+        {
+          type: "input",
+          name: "name",
+          message: "Name:",
+        },
+
+        {
+          type: "input",
+          name: "id",
+          message: "Employee ID:",
+        },
+
+        {
+          type: "input",
+          name: "email",
+          message: "Email address:",
+        },
+
+        {
+          type: "input",
+          name: "officeNumber",
+          message: "Office number:",
+        },
+
+    ])
+    .then((answers) => {
+        const manager = new Manager(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.officeNumber
+        );
+        team.push(manager);
+        promptUser();
+    });
+}
 
 
 
