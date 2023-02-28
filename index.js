@@ -59,6 +59,51 @@ function addIntern(){
 
 }
 
+// add engineer
+function addEngineer() {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "name",
+          message: "Name:",
+        },
+
+        {
+          type: "input",
+          name: "id",
+          message: "Engineer ID:",
+
+        },
+
+        {
+          type: "input",
+          name: "email",
+          message: "Email address:",
+          validate: validateEmail,
+        },
+
+        {
+          type: "input",
+          name: "github",
+          message: "GitHub Username:",
+        },
+
+      ])
+      .then((answers) => {
+        const engineer = new Engineer(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.github
+        );
+        team.push(engineer);
+        promptUser();
+      });
+  }
+
+
+
 /* let team = [];
 
 startProgram()
