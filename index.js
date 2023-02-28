@@ -14,6 +14,51 @@ const Employee = require("./lib/Employee");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
+let team = [];
+
+function addIntern(){
+//Add intern user prompts
+
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "Name:",
+        },
+
+        {
+            type: "input",
+            name: "id",
+            message: "Intern ID:",
+        },
+
+        {
+            type: "input",
+            name: "email",
+            message: "Email address:",
+        },
+
+        {
+            type: "input",
+            name: "school",
+            message: "School:",
+        },
+
+    ])
+
+    .then((answers) =>{
+        const intern = new Intern(
+            answers.name,
+            answers.id,
+            answers.email,
+            answers.school,
+        );
+        team.push(manager);
+        promptUser();
+    });
+
+}
+
 /* let team = [];
 
 startProgram()
