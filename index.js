@@ -24,24 +24,28 @@ function addManager() {
           type: "input",
           name: "name",
           message: "Name:",
+          validate: validateString,
         },
 
         {
           type: "input",
           name: "id",
           message: "Employee ID:",
+          validate: validateId,
         },
 
         {
           type: "input",
           name: "email",
           message: "Email address:",
+          validate: validateEmail,
         },
 
         {
           type: "input",
           name: "officeNumber",
           message: "Office number:",
+          validate: validateId,
         },
 
     ])
@@ -65,24 +69,28 @@ console.log("Please enter information for the Intern:");
             type: "input",
             name: "name",
             message: "Name:",
+            validate: validateString,
         },
 
         {
             type: "input",
             name: "id",
             message: "Intern ID:",
+            validate: validateId,
         },
 
         {
             type: "input",
             name: "email",
             message: "Email address:",
+            validate: validateEmail,
         },
 
         {
             type: "input",
             name: "school",
             message: "School:",
+            validate: validateString,
         },
 
     ])
@@ -108,12 +116,14 @@ function addEngineer() {
           type: "input",
           name: "name",
           message: "Name:",
+          validate: validateString,
         },
 
         {
           type: "input",
           name: "id",
           message: "Engineer ID:",
+          validate: validateId,
 
         },
 
@@ -128,6 +138,7 @@ function addEngineer() {
           type: "input",
           name: "github",
           message: "GitHub Username:",
+          validate: validateString,
         },
 
     ])
@@ -182,6 +193,36 @@ function promptUser() {
         }
       });
   }
+
+  // Call addManager to start the process
+addManager();
+
+// validation
+function validateEmail(value) {
+  let pass = value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
+  if (pass) {
+    return true;
+  }
+
+  return "Please enter a valid email address.";
+}
+
+function validateString(value) {
+  if (!value || typeof value !== "string") {
+    return "This cannot remain empty - please input required value.";
+  }
+  return true;
+}
+
+function validateId(value) {
+  // inquirer prompt answers are always returned as strings
+  const numValue = Number(value);
+  // check isNan
+  if (isNaN(numValue) || numValue < 1000 || value.length < 4) {
+    return "Please enter the 4 digit number: you cannot leave this blank:";
+  }
+  return true;
+}
 
 
 
